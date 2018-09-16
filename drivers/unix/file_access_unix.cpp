@@ -40,7 +40,7 @@
 
 #include <errno.h>
 
-#if defined(UNIX_ENABLED)
+#if defined(UNIX_ENABLED) || defined(HORIZON_ENABLED)
 #include <unistd.h>
 #endif
 
@@ -291,7 +291,7 @@ bool FileAccessUnix::file_exists(const String &p_path) {
 	if (err)
 		return false;
 
-#ifdef UNIX_ENABLED
+#if defined(UNIX_ENABLED) || defined(HORIZON_ENABLED)
 	// See if we have access to the file
 	if (access(filename.utf8().get_data(), F_OK))
 		return false;
