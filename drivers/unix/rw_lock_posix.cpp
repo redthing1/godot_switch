@@ -28,7 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#if defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)
+#if (defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)) && !defined(HORIZON_ENABLED)
+#if defined(_POSIX_READER_WRITER_LOCKS)
 
 #include "rw_lock_posix.h"
 
@@ -99,4 +100,5 @@ RWLockPosix::~RWLockPosix() {
 	pthread_rwlock_destroy(&rwlock);
 }
 
+#endif
 #endif
