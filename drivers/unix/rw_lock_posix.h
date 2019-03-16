@@ -31,7 +31,8 @@
 #ifndef RWLOCKPOSIX_H
 #define RWLOCKPOSIX_H
 
-#if defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)
+#if (defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)) && !defined(HORIZON_ENABLED)
+#if defined(_POSIX_READER_WRITER_LOCKS)
 
 #include "core/os/rw_lock.h"
 #include <pthread.h>
@@ -59,5 +60,5 @@ public:
 };
 
 #endif
-
+#endif
 #endif // RWLOCKPOSIX_H
