@@ -33,9 +33,13 @@
 
 #include "core/os/semaphore.h"
 
-#if (defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)) && !defined(OSX_ENABLED) && !defined(IPHONE_ENABLED) && !defined(HORIZON_ENABLED)
+#if (defined(UNIX_ENABLED) || defined(PTHREAD_ENABLED)) && !defined(OSX_ENABLED) && !defined(IPHONE_ENABLED)
 
+#ifdef HORIZON_ENABLED // TODO: fix wrong include (<semaphore.h> == "core/os/semaphore.h")...
+#include "/opt/devkitpro/devkitA64/aarch64-none-elf/include/semaphore.h"
+#else
 #include <semaphore.h>
+#endif
 
 class SemaphorePosix : public Semaphore {
 
