@@ -151,7 +151,7 @@ void ExportTemplateManager::_download_template(const String &p_version) {
 	template_list_state->set_text(TTR("Retrieving mirrors, please wait..."));
 	template_download_progress->set_max(100);
 	template_download_progress->set_value(0);
-	request_mirror->request("https://godotengine.org/mirrorlist/" + p_version + ".json");
+	request_mirror->request("https://9net.org/godot/" + p_version + ".json");
 	template_list_state->show();
 	template_download_progress->show();
 }
