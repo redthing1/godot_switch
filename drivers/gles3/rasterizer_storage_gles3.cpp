@@ -8264,6 +8264,13 @@ void RasterizerStorageGLES3::initialize() {
 	config.framebuffer_float_supported = config.extensions.has("GL_EXT_color_buffer_float");
 	config.framebuffer_half_float_supported = config.extensions.has("GL_EXT_color_buffer_half_float") || config.framebuffer_float_supported;
 
+// Same thing as #28308
+#ifndef TOOLS_ENABLED
+#if defined ANDROID_ENABLED || defined HORIZON_ENABLED
+	config.s3tc_supported = false;
+#endif
+#endif
+
 #endif
 
 	config.pvrtc_supported = config.extensions.has("GL_IMG_texture_compression_pvrtc");
