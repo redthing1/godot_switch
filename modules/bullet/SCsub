@@ -178,8 +178,21 @@ if env["builtin_bullet"]:
         "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp",
         "BulletSoftBody/btDeformableContactConstraint.cpp",
         "BulletSoftBody/poly34.cpp",
-        # clew
-        "clew/clew.c",
+        "BulletSoftBody/btSoftBody.cpp",
+        "BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp",
+        "BulletSoftBody/btSoftBodyHelpers.cpp",
+        "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.cpp",
+        "BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp",
+        "BulletSoftBody/btSoftRigidDynamicsWorld.cpp",
+        "BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp",
+        "BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp",
+        "BulletSoftBody/btDefaultSoftBodySolver.cpp",
+        "BulletSoftBody/btDeformableBackwardEulerObjective.cpp",
+        "BulletSoftBody/btDeformableBodySolver.cpp",
+        "BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp",
+        "BulletSoftBody/btDeformableContactProjection.cpp",
+        "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp",
+        "BulletSoftBody/btDeformableContactConstraint.cpp",
         # LinearMath
         "LinearMath/btAlignedAllocator.cpp",
         "LinearMath/btConvexHull.cpp",
@@ -200,6 +213,13 @@ if env["builtin_bullet"]:
     thirdparty_sources = [thirdparty_dir + file for file in bullet2_src]
 
     env_bullet.Prepend(CPPPATH=[thirdparty_dir])
+    # Treat Bullet headers as system headers to avoid raising warnings. Not supported on MSVC.
+    if not env.msvc:
+        env_bullet.Append(CPPFLAGS=["-isystem", Dir(thirdparty_dir).path])
+    else:
+        env_bullet.Prepend(CPPPATH=[thirdparty_dir])
+    # if env['target'] == "debug" or env['target'] == "release_debug":
+    #     env_bullet.Append(CPPDEFINES=['BT_DEBUG'])
 
     env_bullet.Append(CPPDEFINES=["BT_USE_OLD_DAMPING_METHOD", "BT_THREADSAFE"])
 
