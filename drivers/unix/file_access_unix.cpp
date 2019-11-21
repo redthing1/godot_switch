@@ -131,6 +131,7 @@ Error FileAccessUnix::_open(const String &p_path, int p_mode_flags) {
 		return last_error;
 	}
 
+#ifndef HORIZON_ENABLED
 	// Set close on exec to avoid leaking it to subprocesses.
 	int fd = fileno(f);
 
@@ -143,7 +144,7 @@ Error FileAccessUnix::_open(const String &p_path, int p_mode_flags) {
 		fcntl(fd, F_SETFD, opts | FD_CLOEXEC);
 #endif
 	}
-
+#endif
 	last_error = OK;
 	flags = p_mode_flags;
 	return OK;
