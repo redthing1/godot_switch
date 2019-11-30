@@ -91,6 +91,7 @@ GLuint RasterizerStorageGLES2::system_fbo = 0;
 #ifndef UWP_ENABLED
 #include <dlfcn.h> // needed to load extensions
 #endif
+#endif
 
 #ifdef IPHONE_ENABLED
 
