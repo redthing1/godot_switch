@@ -392,6 +392,14 @@ Error ProjectSettings::_setup(const String &p_path, const String &p_main_pack, b
 		}
 #endif
 
+#ifdef HORIZON_ENABLED
+		if (!found) {
+                        if (_load_resource_pack("romfs:/game.pck")) {
+                                found = true;
+                        }
+                }
+#endif
+
 		// Attempt with PCK bundled into executable
 		if (!found) {
 			if (_load_resource_pack(exec_path)) {
