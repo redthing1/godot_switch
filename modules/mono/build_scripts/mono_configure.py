@@ -71,6 +71,7 @@ def configure(env, env_mono):
     bits = env['bits']
     is_android = env['platform'] == 'android'
     is_javascript = env['platform'] == 'javascript'
+    is_switch = env['platform'] == 'switch'
 
     tools_enabled = env['tools']
     mono_static = env['mono_static']
@@ -98,7 +99,7 @@ def configure(env, env_mono):
         # Android: When static linking and doing something that requires libmono-native, we get a dlopen error as libmono-native seems to depend on libmonosgen-2.0
         raise RuntimeError('Statically linking Mono is not currently supported on this platform')
 
-    if is_javascript:
+    if is_javascript or is_switch:
         mono_static = True
 
     if not mono_prefix and (os.getenv('MONO32_PREFIX') or os.getenv('MONO64_PREFIX')):
@@ -171,7 +172,7 @@ def configure(env, env_mono):
         mono_lib_path = ''
         mono_so_name = ''
 
-        if not mono_root and (is_android or is_javascript):
+        if not mono_root and (is_android or is_javascript or is_switch):
             raise RuntimeError("Mono installation directory not found; specify one manually with the 'mono_prefix' SCons parameter")
 
         if not mono_root and is_apple:
@@ -213,7 +214,7 @@ def configure(env, env_mono):
                 if is_apple:
                     env.Append(LINKFLAGS=['-Wl,-force_load,' + mono_lib_file])
                 else:
-                    assert is_desktop(env['platform']) or is_android or is_javascript
+                    assert is_desktop(env['platform']) or is_android or is_javascript or is_switch
                     env.Append(LINKFLAGS=['-Wl,-whole-archive', mono_lib_file, '-Wl,-no-whole-archive'])
 
                 if is_javascript:
@@ -244,6 +245,8 @@ def configure(env, env_mono):
                 env.Append(LIBS=['iconv', 'pthread'])
             elif is_android:
                 pass # Nothing
+            elif is_switch:
+                pass
             elif is_javascript:
                 env.Append(LIBS=['m', 'rt', 'dl', 'pthread'])
             else:
