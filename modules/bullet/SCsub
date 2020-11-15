@@ -162,22 +162,21 @@ if env["builtin_bullet"]:
         "BulletInverseDynamics/details/MultiBodyTreeInitCache.cpp",
         "BulletInverseDynamics/details/MultiBodyTreeImpl.cpp",
         # BulletSoftBody
-        , "BulletSoftBody/btSoftBody.cpp"
-        , "BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp"
-        , "BulletSoftBody/btSoftBodyHelpers.cpp"
-        , "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.cpp"
-        , "BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp"
-        , "BulletSoftBody/btSoftRigidDynamicsWorld.cpp"
-        , "BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp"
-        , "BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp"
-        , "BulletSoftBody/btDefaultSoftBodySolver.cpp"
-        , "BulletSoftBody/btDeformableBackwardEulerObjective.cpp"
-        , "BulletSoftBody/btDeformableBodySolver.cpp"
-        , "BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp"
-        , "BulletSoftBody/btDeformableContactProjection.cpp"
-        , "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp"
-        , "BulletSoftBody/btDeformableContactConstraint.cpp"
-
+        "BulletSoftBody/btSoftBody.cpp",
+        "BulletSoftBody/btSoftBodyConcaveCollisionAlgorithm.cpp",
+        "BulletSoftBody/btSoftBodyHelpers.cpp",
+        "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.cpp",
+        "BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp",
+        "BulletSoftBody/btSoftRigidDynamicsWorld.cpp",
+        "BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp",
+        "BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp",
+        "BulletSoftBody/btDefaultSoftBodySolver.cpp",
+        "BulletSoftBody/btDeformableBackwardEulerObjective.cpp",
+        "BulletSoftBody/btDeformableBodySolver.cpp",
+        "BulletSoftBody/btDeformableMultiBodyConstraintSolver.cpp",
+        "BulletSoftBody/btDeformableContactProjection.cpp",
+        "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.cpp",
+        "BulletSoftBody/btDeformableContactConstraint.cpp",
         # LinearMath
         "LinearMath/btAlignedAllocator.cpp",
         "LinearMath/btConvexHull.cpp",
@@ -193,6 +192,9 @@ if env["builtin_bullet"]:
         "LinearMath/TaskScheduler/btThreadSupportPosix.cpp",
         "LinearMath/TaskScheduler/btThreadSupportWin32.cpp",
     ]
+
+    if env["platform"] != "switch":
+        bullet2_source += ["clew/clew.c"]
 
     thirdparty_sources = [thirdparty_dir + file for file in bullet2_src]
 
