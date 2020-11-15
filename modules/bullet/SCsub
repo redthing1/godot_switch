@@ -211,7 +211,7 @@ if env["builtin_bullet"]:
     ]
 
     if env["platform"] != "switch":
-        bullet2_source += ["clew/clew.c"]
+        bullet2_src += ["clew/clew.c"]
 
     thirdparty_sources = [thirdparty_dir + file for file in bullet2_src]
 
