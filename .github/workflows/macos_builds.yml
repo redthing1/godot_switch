@@ -51,6 +51,12 @@ jobs:
         run: |
           scons -j2 verbose=yes warnings=all werror=yes platform=osx tools=yes target=release_debug
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: bin/*
+          retention-days: 14
+
   macos-template:
     runs-on: "macos-latest"
     name: Template (target=release, tools=no)
@@ -92,3 +98,9 @@ jobs:
           SCONS_CACHE: ${{github.workspace}}/.scons_cache/
         run: |
           scons -j2 verbose=yes warnings=all werror=yes platform=osx target=release tools=no
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: bin/*
+          retention-days: 14

@@ -56,6 +56,12 @@ jobs:
       run: |
         scons -j2 verbose=yes warnings=all werror=yes platform=windows tools=yes target=release_debug
 
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ github.job }}
+        path: bin/*
+        retention-days: 14
+
 # Build Product Upload (tested and working)
 # sorry this is disabled until github can give us some more space as we would hit our limit very quickly
 # tested this code and it works fine so just enable it to get them back
@@ -108,11 +114,8 @@ jobs:
       run: |
         scons -j2 verbose=yes warnings=all werror=yes platform=windows target=release tools=no
 
-# Build Product Upload (tested and working)
-# sorry this is disabled until github can give us some more space as we would hit our limit very quickly
-# tested this code and it works fine so just enable it to get them back
-#    - name: publishing godot windows-template
-#      uses: actions/upload-artifact@v1
-#      with:
-#        name: windows-template (x64)
-#        path: bin/godot.windows.opt.64.exe
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ github.job }}
+        path: bin/*
+        retention-days: 14

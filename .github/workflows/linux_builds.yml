@@ -62,6 +62,12 @@ jobs:
         run: |
           scons -j2 verbose=yes warnings=all werror=yes platform=x11 tools=yes target=release_debug module_mono_enabled=yes mono_glue=no
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: bin/*
+          retention-days: 14
+
   linux-template:
     runs-on: "ubuntu-20.04"
     name: Template w/ Mono (target=release, tools=no)
@@ -115,3 +121,9 @@ jobs:
           SCONS_CACHE: ${{github.workspace}}/.scons_cache/
         run: |
           scons -j2 verbose=yes warnings=all werror=yes platform=x11 target=release tools=no module_mono_enabled=yes mono_glue=no
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: bin/*
+          retention-days: 14
