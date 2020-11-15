@@ -210,6 +210,9 @@ if env["builtin_bullet"]:
         "LinearMath/TaskScheduler/btThreadSupportWin32.cpp",
     ]
 
+    if env["platform"] != "switch":
+        bullet2_source += ["clew/clew.c"]
+
     thirdparty_sources = [thirdparty_dir + file for file in bullet2_src]
 
     env_bullet.Prepend(CPPPATH=[thirdparty_dir])
