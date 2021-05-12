@@ -8,9 +8,9 @@ env:
   SCONS_CACHE_LIMIT: 4096
 
 jobs:
-  linux-editor-mono:
+  linux-editor:
     runs-on: "ubuntu-20.04"
-    name: Editor w/ Mono (target=release_debug, tools=yes)
+    name: Editor (target=release_debug, tools=yes)
 
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{github.workspace}}/.scons_cache/
-          key: ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
+          key: ${{github.job}}-bad-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
           restore-keys: |
             ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
             ${{github.job}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
@@ -63,10 +63,7 @@ jobs:
         env:
           SCONS_CACHE: ${{github.workspace}}/.scons_cache/
         run: |
-          scons tools=yes target=release_debug module_mono_enabled=yes mono_glue=no
-          xvfb-run ./bin/godot.x11.opt.tools.64.mono --generate-mono-glue modules/mono/glue || true
-          scons tools=yes target=release_debug module_mono_enabled=yes mono_glue=yes
-          ls -l bin/
+          scons tools=yes target=release_debug
 
       - uses: actions/upload-artifact@v2
         with:
@@ -74,9 +71,9 @@ jobs:
           path: bin/*
           retention-days: 14
 
-  linux-template-mono:
+  linux-template:
     runs-on: "ubuntu-20.04"
-    name: Template w/ Mono (target=release, tools=no)
+    name: Template (target=release, tools=no)
 
     steps:
       - uses: actions/checkout@v2
@@ -128,7 +125,7 @@ jobs:
         env:
           SCONS_CACHE: ${{github.workspace}}/.scons_cache/
         run: |
-          scons target=release tools=no module_mono_enabled=yes mono_glue=no
+          scons target=release tools=no
           ls -l bin/
 
       - uses: actions/upload-artifact@v2
