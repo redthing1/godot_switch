@@ -108,7 +108,8 @@ const CGFloat kGLGestureMovementDistance = 0.5;
 		return;
 	}
 
-	[self.view touchesMoved:cleared withEvent:event];
+	[self.view touchesMoved:cleared
+				  withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
