@@ -176,7 +176,9 @@ static NSCursor *cursorFromSelector(SEL selector, SEL fallback = nil) {
 		[app activateWithOptions:NSApplicationActivateIgnoringOtherApps];
 		break;
 	}
-	[self performSelector:@selector(forceUnbundledWindowActivationHackStep2) withObject:nil afterDelay:0.02];
+	[self performSelector:@selector(forceUnbundledWindowActivationHackStep2)
+			   withObject:nil
+			   afterDelay:0.02];
 }
 
 - (void)forceUnbundledWindowActivationHackStep2 {
