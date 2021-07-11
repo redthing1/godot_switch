@@ -272,7 +272,8 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application willEncodeRestorableStateWithCoder:coder];
+		[service application:application
+				willEncodeRestorableStateWithCoder:coder];
 	}
 }
 
@@ -282,7 +283,8 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application didDecodeRestorableStateWithCoder:coder];
+		[service application:application
+				didDecodeRestorableStateWithCoder:coder];
 	}
 }
 
@@ -294,7 +296,9 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application handleEventsForBackgroundURLSession:identifier completionHandler:completionHandler];
+		[service application:application
+				handleEventsForBackgroundURLSession:identifier
+								  completionHandler:completionHandler];
 	}
 
 	completionHandler();
@@ -344,7 +348,8 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application didUpdateUserActivity:userActivity];
+		[service application:application
+				didUpdateUserActivity:userActivity];
 	}
 }
 
@@ -354,7 +359,9 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application didFailToContinueUserActivityWithType:userActivityType error:error];
+		[service application:application
+				didFailToContinueUserActivityWithType:userActivityType
+												error:error];
 	}
 }
 
@@ -364,7 +371,9 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application performActionForShortcutItem:shortcutItem completionHandler:completionHandler];
+		[service application:application
+				performActionForShortcutItem:shortcutItem
+						   completionHandler:completionHandler];
 	}
 }
 
@@ -376,7 +385,9 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application handleWatchKitExtensionRequest:userInfo reply:reply];
+		[service application:application
+				handleWatchKitExtensionRequest:userInfo
+										 reply:reply];
 	}
 }
 
@@ -452,7 +463,8 @@ static NSMutableArray<ApplicationDelegateService *> *services = nil;
 			continue;
 		}
 
-		[service application:application userDidAcceptCloudKitShareWithMetadata:cloudKitShareMetadata];
+		[service application:application
+				userDidAcceptCloudKitShareWithMetadata:cloudKitShareMetadata];
 	}
 }
 
