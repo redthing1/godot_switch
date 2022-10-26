@@ -16,6 +16,13 @@ Install these packages from devkitPro pacman:
 `switch-pkg-config switch-freetype switch-bulletphysics switch-libtheora switch-libpcre2 switch-mesa switch-opusfile switch-mbedtls switch-libwebp switch-libvpx switch-miniupnpc switch-libzstd switch-wslay`
 then run `scons platform=switch` in the root of the repo.
 
+```sh
+# build switch binaries
+scons target=release platform=switch -j$(nproc)
+# build desktop editor
+scons target=release_debug tools=yes -j$(nproc)
+```
+
 # How can I get help?
 Either make an issue on this repo, or join the [Discord](https://discordapp.com/invite/yUC3rUk)!
 
